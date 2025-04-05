@@ -7,7 +7,7 @@ import time
 import random
 import plotly.express as px 
 import plotly.graph_objects as go 
-from streamlit.lottie import st_lottie 
+from streamlit_lottie import st_lottie 
 import requests
 
 
@@ -119,18 +119,18 @@ def load_library():
                 return True
             return False
     except Exception as e:
-        st.error(f"Error loading library:{e}")
+        st.error(f"Error loading libary:{e}")
         return False
 
 #save librar
 def save_library():
     try:
-        with open('library.json','w') as file:
-            json.dump(st.session_state.library,file)
+        with open('libary.json','w') as file:
+            json.dump(st.session_state.libary,file)
             return True
     except Exception as e:
-         st.error(f"Error loading library:{e}")
-         return False
+        st.error(f"Error loading libary: {e}")
+        return False
 
 # add a book to library
 def add_book(title,autor,publication_year,genre,read_status):
@@ -149,9 +149,9 @@ def add_book(title,autor,publication_year,genre,read_status):
 
 #remove books 
 def remove_book(index):
-    if 0 <= index <len (st.session_state.library):
+    if 0 <= index <len (st.session_state.libary):
 
-        del st.session_state.library[index]
+        del st.session_state.libary[index]
         save_library()
         st.session_state.book_removed = True
         return True
@@ -291,7 +291,7 @@ elif nav_option == "session Books":
 elif nav_option == "library statistics":
     st.session_state.current_view = "stats",
 
-st.markdow("<h1 class = 'main-header'>personal library Manger</h1>",unsafe_allow_html = True)
+st.markdown("<h1 class = 'main-header'>personal library Manger</h1>",unsafe_allow_html = True)
 if st.session_state.current_view == "add":
     st.markdown("<h2 class ='sub-header'Add a new book</h2>",unsafe_allow_html = True)
 
@@ -320,7 +320,7 @@ if st.session_state.current_view == "add":
 elif st.session_state.current_view == "library":
     st.markdown("<h2 class ='sub-header'> Your library</h2>",unsafe_allow_html = True)
 
-    if not st.session_state.library:
+    if not st.session_state.libary:
         st.markdown("<div> class ='warning-message>' Your library is empty .Add some books to get started!</div>",unsafe_allow_html = True)
 
     else:
@@ -408,7 +408,7 @@ elif st.session_state.currend_view =="stats":
             for author, count in top_authors.items():
                 st.markdown(f"**{author}**:{count}book{'s'if count> 1 else ''}")
 st.markdown("---")
-st.mardown("Copyrigth @ 2025 Prithvi kishan personal library Manager",unsafe_allow_html =True)
+st.markdown("😎Copyrigth @ 2025 Prithvi kishan personal library Manager",unsafe_allow_html =True)
 
 
 
